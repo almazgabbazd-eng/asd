@@ -1,16 +1,11 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
-
-
-# C extensions
 *.so
-
-# Distribution / packaging
 .Python
 build/
-develop-eggs/
+develop-eggs
 dist/
 downloads/
 eggs/
@@ -26,58 +21,17 @@ wheels/
 *.egg
 MANIFEST
 
-# PyInstaller
-*.manifest
-*.spec
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+# OS
+.DS_Store
+Thumbs.db
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
+# Data
+data/*
+!data/history.json
 
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-.python-version
-
-# celery
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
