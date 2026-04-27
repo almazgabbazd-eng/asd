@@ -71,15 +71,12 @@ def load_history():
 # Функция сохранения истории в файл
 def save_history(history_list):
     try:
-        # Создаём папку data, если её нет
-        import os
-        os.makedirs("data", exist_ok=True)
-        with open("data/history.json", "w", encoding="utf-8") as file:
+        with open("history.json", "w", encoding="utf-8") as file:
             json.dump(history_list, file, ensure_ascii=False, indent=2)
     except Exception as e:
         messagebox.showerror("Ошибка", f"Не удалось сохранить историю: {e}")
 
-# Функция добавления новой задачи
+# Функция добавления новой задачи с проверкой на дубликаты
 def add_task():
     global tasks
     try:
@@ -94,6 +91,20 @@ def add_task():
             return
         else:
             category = category_lb.get(category_indx[0])
+
+        # Проверка на дублирование: ищем задачу с таким же текстом и категорией
+        is_duplicate = any(
+            existing_task["task"].strip().lower() == task.lower()
+            and existing_task["category"] == category
+            for existing_task in tasks
+        )
+
+        if is_duplicate:
+            showerror(
+                title="Ошибка",
+                message="Задача с таким текстом уже существует в этой категории"
+            )
+            return
 
         new_task = {"category": category, "task": task}
         tasks.append(new_task)
@@ -161,6 +172,7 @@ result_btn.pack(pady=5)
 history_frame = tk.Frame(window)
 history_frame.place(x=500, y=60)
 
+
 # Label истории
 history_label = tk.Label(history_frame, text="История генераций:")
 history_label.pack()
@@ -206,3 +218,4 @@ update_history_display()
 
 # Запуск программы
 window.mainloop()
+
