@@ -1,0 +1,19 @@
+def load_history():
+    try:
+        import os
+        os.makedirs("data", exist_ok=True)  # Создаём папку, если её нет
+        with open("data/history.json", "r", encoding="utf-8") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+    except json.JSONDecodeError:
+        messagebox.showerror("Ошибка", "Файл history.json повреждён. Создаётся новая история.")
+        return []
+
+
+def save_history(history_list):
+    try:
+        with open("data/history.json", "w", encoding="utf-8") as file:
+            json.dump(history_list, file, ensure_ascii=False, indent=2)
+    except Exception as e:
+        messagebox.showerror("Ошибка", f"Не удалось сохранить историю: {e}")
