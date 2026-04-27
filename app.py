@@ -96,6 +96,7 @@ class RandomTaskGenerator:
         else:
             available_tasks = [task for task in self.predefined_tasks if task["type"] == filter_type]
 
+
         if not available_tasks:
             messagebox.showwarning("Предупреждение", "Нет задач для выбранного фильтра!")
             return
@@ -139,6 +140,7 @@ class RandomTaskGenerator:
         filter_type = self.filter_combo.get()
         filtered_history = self.history
 
+
         if filter_type != "Все":
             filtered_history = [entry for entry in self.history if entry["type"] == filter_type]
         for entry in filtered_history:
@@ -160,5 +162,11 @@ class RandomTaskGenerator:
             self.save_history()
             messagebox.showinfo("Успех", "История очищена!")
 
-    def load_history(self):
-        """Загрузка истории из файла"""
+    def save_history(self):
+        """Сохранение истории в JSON-файл"""
+        os.makedirs('data', exist_ok=True)
+        try:
+            with open('data/history.json', 'w', encoding='utf-8') as f:
+                json.dump(self.history, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            messagebox.showerror("Ошибка сохранения", f"Не удалось сохранить историю: {e}")
