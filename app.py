@@ -170,3 +170,8 @@ class RandomTaskGenerator:
                 json.dump(self.history, f, ensure_ascii=False, indent=2)
         except Exception as e:
             messagebox.showerror("Ошибка сохранения", f"Не удалось сохранить историю: {e}")
+            if __name__ == '__main__':
+    root = tk.Tk()
+    app = RandomTaskGenerator(root)
+    root.mainloop()
+
